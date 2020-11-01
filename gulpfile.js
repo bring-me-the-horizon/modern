@@ -8,7 +8,7 @@ let gulp = require('gulp'), // Плагин подключения gulp
     cssmin = require('gulp-cssmin');
 
   gulp.task('sass', function(){  // Связываем переменные через канал .pipe(труба)
-    return gulp.src('app/scss/style.scss')  
+    return gulp.src('app/scss/**/*.scss')  // звездочки значят что будет конвертить все файлы scss - через нижнее подчеркивание трогать не будет
             .pipe(sass({outputStyle: 'compressed'}))
             .pipe(rename({suffix : '.min'}))
             .pipe(autoprefixer({
@@ -55,14 +55,14 @@ let gulp = require('gulp'), // Плагин подключения gulp
         server: {
             baseDir: "app/" // Путь откуда забираю данные
         },
-        online: true,
-        tunnel: true,  // Задаю отдельный тунель для мобильноый версии (вход через мобильник)
-        logLevel: "debug"
+        // online: true,
+        // tunnel: true,  
+        // logLevel: "debug"
     });
 });
 
   gulp.task('watch', function(){
-    gulp.watch('app/scss/style.scss', gulp.parallel('sass'));
+    gulp.watch('app/scss/**/*.scss', gulp.parallel('sass'));
     gulp.watch('app/*.html', gulp.parallel('html'));  // Встроенная функция для просмотра и запуска через gulp всех неободимых файлов
     gulp.watch('app/js/*.js', gulp.parallel('js'));
   });
